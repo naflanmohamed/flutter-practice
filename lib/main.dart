@@ -66,14 +66,47 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Hello, Flutter!',
+              'Fill the Form',
               style: TextStyle(fontSize: 24),
             ),
             SizedBox(height: 20),
+
+            // Wrap the text fields inside a Column instead of SizedBox
+            SizedBox(
+              width: 315,
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Username',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  SizedBox(height: 10), // Spacing between fields
+                  TextFormField(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Please Enter some Text";
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(
+                      labelText: "Password",
+                      border: OutlineInputBorder(),
+                    ),
+                    obscureText: true,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Image.asset('assets/images/naflan-favicon.png',),
+            SizedBox(height: 20), // Spacing before button
             ElevatedButton(
               onPressed: changeText,
               child: Text(buttonText),
