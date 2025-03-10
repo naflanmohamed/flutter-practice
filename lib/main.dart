@@ -26,11 +26,12 @@ class _MyHomePageState extends State<MyHomePage> {
   String buttonText = 'Login';
   bool isVerified = false;
 
-  void changeText() {
+  void navigateToCategoriesPage() {
     if (isVerified) {
-      setState(() {
-        buttonText = 'Logedin';
-      });
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => CategoriesPage()),
+      );
     }
   }
 
@@ -38,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('My First Flutter App'),
+        title: Text('Shop'),
         backgroundColor: Colors.blue,
         actions: const [
           Padding(
@@ -124,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             SizedBox(height: 20),
             ElevatedButton(
-              onPressed: isVerified ? changeText : null,
+              onPressed: isVerified ? navigateToCategoriesPage : null,
               child: Text(buttonText),
             ),
             SizedBox(height: 20),
@@ -134,6 +135,41 @@ class _MyHomePageState extends State<MyHomePage> {
               Image.asset('assets/images/naflan-favicon.png'),
             ],
             )
+          ],
+        ),
+      ),
+    );
+  }
+}
+class CategoriesPage extends StatelessWidget {
+  const CategoriesPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Categories'),
+        backgroundColor: Colors.blue,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text("Categories", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+            ListView.builder(
+              shrinkWrap: true, // Allows ListView to fit within Column
+              physics: ClampingScrollPhysics(), // Enables ListView scrolling inside SingleChildScrollView
+              itemCount: 15,
+              itemBuilder: (BuildContext context, int index) {
+                return ListTile(
+                  leading: const Icon(Icons.food_bank),
+                  trailing: const Text(
+                    'Food',
+                    style: TextStyle(color: Colors.blue, fontSize: 15),
+                  ),
+                  title: Text("List item $index"),
+                );
+              },
+            ),
           ],
         ),
       ),
