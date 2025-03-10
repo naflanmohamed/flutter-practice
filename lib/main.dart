@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(scaffoldBackgroundColor: Color(0xFFF2F2F2)),
       home: MyHomePage(),
     );
   }
@@ -22,12 +23,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String buttonText = 'Click here';
+  String buttonText = 'Login';
+  bool isVerified = false;
 
   void changeText() {
-    setState(() {
-      buttonText = 'Clicked';
-    });
+    if (isVerified) {
+      setState(() {
+        buttonText = 'Logedin';
+      });
+    }
   }
 
   @override
@@ -69,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Fill the Form',
+              'Login to your Account',
               style: TextStyle(fontSize: 24),
             ),
             SizedBox(height: 20),
@@ -102,15 +106,34 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 20,
+
+            SizedBox(height: 20), // Spacing before verification
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Checkbox(
+                  value: isVerified,
+                  onChanged: (bool? value) {
+                    setState(() {
+                      isVerified = value ?? false;
+                    });
+                  },
+                ),
+                Text("I'm not a robot"),
+              ],
             ),
-            Image.asset('assets/images/naflan-favicon.png',),
-            SizedBox(height: 20), // Spacing before button
+            SizedBox(height: 20),
             ElevatedButton(
-              onPressed: changeText,
+              onPressed: isVerified ? changeText : null,
               child: Text(buttonText),
             ),
+            SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Image.network('https://53.fs1.hubspotusercontent-na1.net/hubfs/53/image8-2.jpg', height: 50),
+              Image.asset('assets/images/naflan-favicon.png'),
+            ],
+            )
           ],
         ),
       ),
