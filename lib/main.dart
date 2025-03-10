@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -37,7 +38,14 @@ class MyApp extends StatelessWidget {
                     leading: const Icon(Icons.train),
                     title: const Text('Train'),
                     onTap: (){},
-                  )
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.bike_scooter),
+                    title: const Text('Bike'),
+                    onTap: (){},
+                  ),
+
+
                 ],
               )
             ),
@@ -50,3 +58,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
